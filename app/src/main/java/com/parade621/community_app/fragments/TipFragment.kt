@@ -9,12 +9,11 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.parade621.community_app.R
-import com.parade621.community_app.databinding.FragmentHomeBinding
+import com.parade621.community_app.databinding.FragmentTipBinding
 
+class TipFragment : Fragment() {
 
-class HomeFragment : Fragment() {
-
-    private lateinit var binding : FragmentHomeBinding
+    private lateinit var binding : FragmentTipBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,22 +23,33 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
+
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_tip,container,false)
 
         binding.homeTab.setOnClickListener {
-            Toast.makeText(context, "현재 탭입니다!",Toast.LENGTH_SHORT).show()
+
+            it.findNavController().navigate(R.id.action_tipFragment_to_homeFragment)
+
         }
         binding.goodtipTab.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_tipFragment)
+
+            Toast.makeText(context, "현재 탭입니다!", Toast.LENGTH_SHORT).show()
+
         }
         binding.talkTab.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_talkFragment)
+
+            it.findNavController().navigate(R.id.action_tipFragment_to_talkFragment)
+
         }
         binding.bookmarkTab.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_bookmarkFragment)
+
+            it.findNavController().navigate(R.id.action_tipFragment_to_bookmarkFragment)
+
         }
         binding.storeTab.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_storeFragment)
+
+            it.findNavController().navigate(R.id.action_tipFragment_to_storeFragment)
+
         }
 
         return binding.root
