@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/joinBtn"
                 android:layout_margin="20dp"
                 android:background="@drawable/background_radius_yellow"

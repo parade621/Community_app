@@ -1,6 +1,8 @@
 package com.parade621.community_app.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.parade621.community_app.R
+import com.parade621.community_app.contentList.ContentListActivity
 import com.parade621.community_app.databinding.FragmentTipBinding
 
 class TipFragment : Fragment() {
@@ -25,6 +28,15 @@ class TipFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_tip,container,false)
+
+        binding.category1.setOnClickListener {
+            try{
+                val intent = Intent(context, ContentListActivity::class.java)
+                startActivity(intent)
+            }catch(e:Exception){
+                Log.e("THis Error occurred!", e.message.toString())
+            }
+        }
 
         binding.homeTab.setOnClickListener {
 

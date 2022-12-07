@@ -14,6 +14,100 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="65dp"
+                android:orientation="vertical">
+                
+                <LinearLayout
+                    android:weightSum="3"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+                    <ImageView
+                        android:id="@+id/category1"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/main_icon_all"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"/>
+                    <ImageView
+                        android:id="@+id/category2"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/main_icon_cook"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"/>
+                    <ImageView
+                        android:id="@+id/category3"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/main_icon_economy"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="3"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+                    <ImageView
+                        android:id="@+id/category4"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/main_icon_else"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"/>
+                    <ImageView
+                        android:id="@+id/category5"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/main_icon_hobby"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"/>
+                    <ImageView
+                        android:id="@+id/category6"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/main_icon_interior"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:weightSum="3"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+                    <ImageView
+                        android:id="@+id/category7"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/main_icon_life"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"/>
+                    <ImageView
+                        android:id="@+id/category8"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/main_icon_oneroom"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"/>
+                    <ImageView
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 현재 Fragment 표시 -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:orientation="horizontal"
                 android:weightSum="5"
@@ -46,7 +140,7 @@
                     android:layout_weight="1" />
 
             </LinearLayout>
-
+            <!-- 하단 바 -->
             <LinearLayout
                 android:id="@+id/linearLayout6"
                 android:layout_width="match_parent"

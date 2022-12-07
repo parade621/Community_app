@@ -5,7 +5,10 @@ import android.content.Intent
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
@@ -23,6 +26,7 @@ class JoinActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityJoinBinding
     private lateinit var inputMethodManager : InputMethodManager
+    private lateinit var animation:Animation
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -30,6 +34,7 @@ class JoinActivity : AppCompatActivity() {
         setContentView(R.layout.activity_join)
         auth = Firebase.auth
         binding = DataBindingUtil.setContentView(this, R.layout.activity_join)
+        animation = AnimationUtils.loadAnimation(this, R.anim.shake)
 
         binding.joinBtn.setOnClickListener {
 
@@ -91,8 +96,17 @@ class JoinActivity : AppCompatActivity() {
                             startActivity(intent)
 
                         } else {
-
-                            Toast.makeText(baseContext, "회원가입 실패", Toast.LENGTH_SHORT).show()
+                            // 이메일 중복 시, 다시 요청하는 코드.
+                            try{
+                                task.getResult()
+                            }catch (e: Exception) {
+                                e.printStackTrace()
+                                Log.d("EmailErrorLog",e.message.toString())
+                                Toast.makeText(baseContext, "회원가입 실패: 이미 존재하는 이메일 양식입니다.", Toast.LENGTH_SHORT).show()
+                                binding.emailTextArea.startAnimation(animation)
+                                binding.emailTextArea.requestFocus()
+                                inputMethodManager.showSoftInput(binding.emailTextArea, InputMethodManager.SHOW_FORCED)
+                            }
 
                         }
                     }
