@@ -32,10 +32,21 @@ class TipFragment : Fragment() {
         binding.category1.setOnClickListener {
             try{
                 val intent = Intent(context, ContentListActivity::class.java)
+                intent.putExtra("category","category1")
                 startActivity(intent)
             }catch(e:Exception){
                 Log.e("THis Error occurred!", e.message.toString())
             }
+        }
+        binding.category2.setOnClickListener {
+            val intent = Intent(context, ContentListActivity::class.java)
+            intent.putExtra("category","category2")
+            startActivity(intent)
+        }
+        binding.category3.setOnClickListener {
+            val intent = Intent(context, ContentListActivity::class.java)
+            intent.putExtra("category","category3")
+            startActivity(intent)
         }
 
         binding.homeTab.setOnClickListener {
