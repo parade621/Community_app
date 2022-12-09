@@ -1,14 +1,11 @@
 package com.parade621.community_app.contentList
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -97,6 +94,6 @@ class ContentListActivity : AppCompatActivity() {
                 Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
             }
         }
-        FBRef.getBookmarkRef().child(FBAuth.getUid()).addValueEventListener(postListener)
+        FBRef.bookmarkRef.child(FBAuth.getUid()).addValueEventListener(postListener)
     }
 }

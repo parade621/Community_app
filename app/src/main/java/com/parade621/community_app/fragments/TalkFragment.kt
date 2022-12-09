@@ -1,5 +1,6 @@
 package com.parade621.community_app.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.parade621.community_app.R
+import com.parade621.community_app.board.BoardWriteActivity
 import com.parade621.community_app.databinding.FragmentTalkBinding
 
 class TalkFragment : Fragment() {
@@ -25,6 +27,11 @@ class TalkFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_talk,container,false)
+
+        binding.writeBtn.setOnClickListener {
+            val intent = Intent(context,BoardWriteActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.homeTab.setOnClickListener {
 

@@ -11,15 +11,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import com.parade621.community_app.R
 import com.parade621.community_app.utils.FBAuth
 import com.parade621.community_app.utils.FBRef
 
-class ContentRVAdapter(val context : Context,
-                       val items: ArrayList<ContentModel>,
-                       val itemKeyList:ArrayList<String>,
-                       val bookmarIdkList:MutableList<String>?):RecyclerView.Adapter<ContentRVAdapter.ViewHolder>() {
+class ContentRVAdapter(
+    val context: Context,
+    val items: ArrayList<ContentModel>,
+    val itemKeyList:ArrayList<String>,
+    val bookmarIdkList:MutableList<String>?):RecyclerView.Adapter<ContentRVAdapter.ViewHolder>() {
 
     /*interface ItemClick{
         fun onClick(view : View, position: Int)
@@ -80,7 +80,7 @@ class ContentRVAdapter(val context : Context,
             bookmarkArea.setOnClickListener {
                 Log.d("ContentRVAdapter",FBAuth.getUid())
 
-                if(bookmarIdkList!!.contains(key)) {
+                if(bookmarIdkList.contains(key)) {
                     // 북마크 삭제
                     Toast.makeText(context, "북마크 삭제", Toast.LENGTH_SHORT).show()
                     FBRef.removeBookmark(key)
