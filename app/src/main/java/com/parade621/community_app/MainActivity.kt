@@ -10,6 +10,7 @@ import com.google.firebase.ktx.Firebase
 import com.parade621.community_app.auth.IntroActivity
 import com.parade621.community_app.databinding.ActivityMainBinding
 import com.parade621.community_app.fragments.HomeFragment
+import com.parade621.community_app.setting.SettingActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,10 +27,10 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
 
 
+        //드로워로 대체될 예정.
         binding.sideMenuBtn.setOnClickListener {
-            Firebase.auth.signOut()
-            val intent = Intent(this, IntroActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+            val intent = Intent(this,SettingActivity::class.java)
             startActivity(intent)
         }
     }

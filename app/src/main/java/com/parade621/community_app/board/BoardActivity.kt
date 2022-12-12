@@ -19,6 +19,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.parade621.community_app.R
 import com.parade621.community_app.databinding.ActivityBoardBinding
+import com.parade621.community_app.utils.FBAuth
 import com.parade621.community_app.utils.FBRef
 
 class BoardActivity : AppCompatActivity() {
@@ -28,6 +29,7 @@ class BoardActivity : AppCompatActivity() {
     private lateinit var binding:ActivityBoardBinding
     private lateinit var storage:FirebaseStorage
     private lateinit var key:String
+    private lateinit var uid:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -79,6 +81,8 @@ class BoardActivity : AppCompatActivity() {
                     binding.boardTimeArea.text = boardData.time
                     binding.boardTitleArea.text = boardData.title
                     binding.boardContentArea.text = boardData.content
+                    uid = boardData.uid
+
                 }catch(e:Exception){
                     Log.d("${key}_Board","삭제완료")
                 }
@@ -120,17 +124,24 @@ class BoardActivity : AppCompatActivity() {
 
         val alertDialog = mBuilder.show()
         alertDialog.findViewById<AppCompatButton>(R.id.modifyBtn)?.setOnClickListener {
-
-            val intent = Intent(baseContext, BoardEditActivity::class.java)
-            intent.putExtra("key",key)
-            startActivity(intent)
-            alertDialog.cancel()
+            if(uid == FBAuth.getUid()) {
+                val intent = Intent(baseContext, BoardEditActivity::class.java)
+                intent.putExtra("key", key)
+                startActivity(intent)
+                alertDialog.cancel()
+            }else {
+                Toast.makeText(this, "권한이 없습니다.", Toast.LENGTH_SHORT).show()
+            }
 
         }
         alertDialog.findViewById<AppCompatButton>(R.id.deleteBtn)?.setOnClickListener {
-            FBRef.boardRef.child(key).removeValue()
-            Toast.makeText(this,"삭제되었습니다.",Toast.LENGTH_SHORT).show()
-            finish()
+            if(uid == FBAuth.getUid()) {
+                FBRef.boardRef.child(key).removeValue()
+                Toast.makeText(this, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                finish()
+            }else {
+                Toast.makeText(this, "권한이 없습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
