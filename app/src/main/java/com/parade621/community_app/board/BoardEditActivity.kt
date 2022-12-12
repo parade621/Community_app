@@ -57,7 +57,7 @@ class BoardEditActivity : AppCompatActivity() {
             val content = binding.boardContentArea.text.toString()
 
             var items:BoardModel?
-            items= BoardModel(title,content, FBAuth.getUid(), originalTime+" 수정됨")
+            items= BoardModel(title,content, FBAuth.getUid(), originalTime)
 
             FBRef.editBoard(key, items) // 게시글의 key값을 받아온다.
             // 이미지 이름을 아무렇게나 넣으면, 이미지 이름에 대한 정보를 모르기 때문에, key값으로 줘서 찾기 쉽게 하는 거임.
@@ -82,11 +82,15 @@ class BoardEditActivity : AppCompatActivity() {
 
                     binding.boardTitleArea.setText(boardData.title)
                     binding.boardContentArea.setText(boardData.content)
+
+                    // 괜히 이거 만들어보겠다고 설쳤다.
                     if(boardData.time.contains("수정됨")) {
-                    }else originalTime=boardData.time
+                        originalTime=boardData.time
+                        // 이부분 작성안해서 앱 터지는걸 한참 못찾음.
+                    }else originalTime=boardData.time+" 수정됨"
 
                 }catch(e:Exception){
-                    Log.d("${key}_Board","삭제완료")
+                    Log.d("${key}_Board","맛감")
                 }
             }
             override fun onCancelled(databaseError: DatabaseError) {
