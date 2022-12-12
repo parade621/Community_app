@@ -45,18 +45,23 @@ class BoardActivity : AppCompatActivity() {
         // 액티비티 실행시 설정사항
         key= intent.getStringExtra("key").toString()
 
+        /*// 주요 기능
+        setBoard() // FB RB에서 게시글 받아오기
+        setImage() // FB Storage에서 사진 받아오기
+        binding.boardSettingIcon.setOnClickListener {
+            showDialog()
+        }*/
+
     }
 
     override fun onStart() {
         super.onStart()
-
         // 주요 기능
         setBoard() // FB RB에서 게시글 받아오기
         setImage() // FB Storage에서 사진 받아오기
         binding.boardSettingIcon.setOnClickListener {
             showDialog()
         }
-
     }
 
     private fun setBoard(){
@@ -130,12 +135,4 @@ class BoardActivity : AppCompatActivity() {
 
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        finish()
-        overridePendingTransition(0, 0) //인텐트 효과 없애기
-        val intent = intent //인텐트
-        startActivity(intent) //액티비티 열기
-        overridePendingTransition(0, 0) //인텐트 효과 없애기
-    }
 }
