@@ -32,13 +32,24 @@ class FBRef {
                 .removeValue()
         }
 
-        fun addBoard(boardModle:BoardModel){
+        fun addBoard(boardModle:BoardModel):String{
+
             // board
             //  -key
             //      -boardModel(title, content, 작성자 uid, upload time)
+            // FB storage에 사진을 넣기위해 key값을 반환.
             //로 구현될것.
+            val key = boardRef.push().key.toString()
             boardRef
-                .push()
+                .child(key)
+                .setValue(boardModle)
+
+            return key
+        }
+        fun editBoard(key:String,boardModle:BoardModel){
+            //val key = boardRef.push().key.toString()
+            boardRef
+                .child(key)
                 .setValue(boardModle)
         }
 
