@@ -17,6 +17,6 @@ class ContentShowActivity : AppCompatActivity() {
 
         val webView :WebView = findViewById(R.id.webView)
         webView.loadUrl(getUrl.toString())
-
+        finish()
     }
 }
