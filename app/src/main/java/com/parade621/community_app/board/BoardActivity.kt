@@ -4,10 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnCompleteListener
@@ -29,7 +31,7 @@ class BoardActivity : AppCompatActivity() {
     private lateinit var binding:ActivityBoardBinding
     private lateinit var storage:FirebaseStorage
     private lateinit var key:String
-    private lateinit var uid:String
+    //private lateinit var writeUser:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -47,12 +49,6 @@ class BoardActivity : AppCompatActivity() {
         // 액티비티 실행시 설정사항
         key= intent.getStringExtra("key").toString()
 
-        /*// 주요 기능
-        setBoard() // FB RB에서 게시글 받아오기
-        setImage() // FB Storage에서 사진 받아오기
-        binding.boardSettingIcon.setOnClickListener {
-            showDialog()
-        }*/
 
     }
 
@@ -61,6 +57,10 @@ class BoardActivity : AppCompatActivity() {
         // 주요 기능
         setBoard() // FB RB에서 게시글 받아오기
         setImage() // FB Storage에서 사진 받아오기
+    }
+
+    override fun onResume() {
+        super.onResume()
         binding.boardSettingIcon.setOnClickListener {
             showDialog()
         }
@@ -69,19 +69,23 @@ class BoardActivity : AppCompatActivity() {
     private fun setBoard(){
         // firebase의 데이터베이스에서 key값에 해당하는 게시글을 받아옴.
         // 이후, 바로 액티비티의 뷰에 적용시킨다.
-
         // ***추가 Notice***
         // 밑에 Dialog에서 삭제하는 기능을 구현하면, 이 부분때문에 앱이 죽음. 그래서 try~catch문으로 작성함.
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
                 try {
                     boardData = dataSnapshot.getValue(BoardModel::class.java)!!
 
                     binding.boardTimeArea.text = boardData.time
                     binding.boardTitleArea.text = boardData.title
                     binding.boardContentArea.text = boardData.content
-                    uid = boardData.uid
+
+                    // 밑에 이걸 여기서 안해주면 계속 uid관련 오류가 남ㅠㅠ
+                    if (FBAuth.getUid().equals(boardData.uid)){
+                        // 글쓴이만 수정/삭제 가능.
+                        binding.boardSettingIcon.visibility = View.VISIBLE
+                    }
+
 
                 }catch(e:Exception){
                     Log.d("${key}_Board","삭제완료")
@@ -104,6 +108,7 @@ class BoardActivity : AppCompatActivity() {
         val storageReference = Firebase.storage.reference.child("${key}.png")
         val imageView = binding.imageArea
 
+
         storageReference.downloadUrl.addOnCompleteListener(OnCompleteListener { task->
             if(task.isSuccessful){
                 Glide.with(this)
@@ -115,35 +120,27 @@ class BoardActivity : AppCompatActivity() {
         })
     }
 
-    private fun showDialog(){
+    private fun showDialog() {
 
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog,null)
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
         val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
             .setTitle("게시글 수정/삭제")
 
         val alertDialog = mBuilder.show()
         alertDialog.findViewById<AppCompatButton>(R.id.modifyBtn)?.setOnClickListener {
-            if(uid == FBAuth.getUid()) {
-                val intent = Intent(baseContext, BoardEditActivity::class.java)
-                intent.putExtra("key", key)
-                startActivity(intent)
-                alertDialog.cancel()
-            }else {
-                Toast.makeText(this, "권한이 없습니다.", Toast.LENGTH_SHORT).show()
-            }
-
+            val intent = Intent(baseContext, BoardEditActivity::class.java)
+            intent.putExtra("key", key)
+            startActivity(intent)
+            alertDialog.cancel()
         }
         alertDialog.findViewById<AppCompatButton>(R.id.deleteBtn)?.setOnClickListener {
-            if(uid == FBAuth.getUid()) {
-                FBRef.boardRef.child(key).removeValue()
-                Toast.makeText(this, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
-                finish()
-            }else {
-                Toast.makeText(this, "권한이 없습니다.", Toast.LENGTH_SHORT).show()
-            }
-        }
 
+            FBRef.boardRef.child(key).removeValue()
+            Toast.makeText(this, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
+            finish()
+
+        }
     }
 
 }
