@@ -95,6 +95,7 @@
 
                 <ListView
                     android:id="@+id/commentListView"
+                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="1000dp"
                     android:layout_marginLeft="20dp"
