@@ -8,8 +8,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -176,12 +179,15 @@ class BoardActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 commentList.clear()
+                var commentSize:Int = 0
 
                 for (dataModel in dataSnapshot.children){
                     val item = dataModel.getValue(CommentModel::class.java)
                     Log.d("왜 내용이 안나옴?",item?.comment.toString())
                     commentList.add(item!!)
+                    commentSize++
                 }
+                setHeight(commentSize)
                 clvAdapter.notifyDataSetChanged()
             }
 
@@ -191,6 +197,14 @@ class BoardActivity : AppCompatActivity() {
             }
         }
         FBRef.commentRef.child(key).addValueEventListener(postListener)
+    }
+
+    fun setHeight(size:Int){
+        val commentParam:ViewGroup.LayoutParams = binding.commentListView.layoutParams
+        val displayMetrics = resources.displayMetrics
+        val dp = Math.round((100*size+20) * displayMetrics.density) // 너무 딱 맞게 높이를 설정하면, ListView의 Scroll 기능이 나타나서 +20 해줌.
+        commentParam.height = dp
+        binding.commentListView.layoutParams=commentParam
     }
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
