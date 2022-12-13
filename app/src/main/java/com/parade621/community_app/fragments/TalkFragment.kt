@@ -108,7 +108,7 @@ class TalkFragment : Fragment() {
                 boardKeyList.clear()
 
                 for (dataModel in dataSnapshot.children){
-                    val item = dataModel.getValue(BoardModel::class.java)
+                    val item:BoardModel? = dataModel.getValue(BoardModel::class.java)
                     boardList.add(item!!)
                     boardKeyList.add(dataModel.key.toString())
                 }

@@ -23,4 +23,8 @@
 
     </style>
 
+    <style name="EditText_NoLine" parent="android:Widget.EditText">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

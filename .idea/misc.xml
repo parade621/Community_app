@@ -5,7 +5,10 @@
       <map>
         <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/drawable/background_radius.xml" value="0.315" />
         <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/drawable/background_radius_yellow.xml" value="0.315" />
-        <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/layout/activity_board.xml" value="0.5" />
+        <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/drawable/comment_border.xml" value="0.367" />
+        <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/drawable/comment_border_cover.xml" value="0.367" />
+        <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/drawable/comment_border_padding.xml" value="0.33" />
+        <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/layout/activity_board.xml" value="0.33" />
         <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/layout/activity_board_edit.xml" value="0.43802083333333336" />
         <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/layout/activity_board_write.xml" value="0.37552083333333336" />
         <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/layout/activity_content_list.xml" value="0.37552083333333336" />
@@ -16,6 +19,7 @@
         <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/layout/activity_setting.xml" value="0.43802083333333336" />
         <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/layout/activity_splash.xml" value="0.31302083333333336" />
+        <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/layout/board_comment_lv_item.xml" value="0.36614583333333334" />
         <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/layout/board_lv_items.xml" value="0.33" />
         <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/layout/cumstom_dialog.xml" value="0.43697916666666664" />
         <entry key="..\:/Github/Toy_Project/Community_App/app/src/main/res/layout/fragment_bookmark.xml" value="0.35260416666666666" />
