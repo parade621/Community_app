@@ -178,7 +178,8 @@ class BoardActivity : AppCompatActivity() {
                 commentList.clear()
 
                 for (dataModel in dataSnapshot.children){
-                    val item:CommentModel? = dataModel.getValue(CommentModel::class.java)
+                    val item = dataModel.getValue(CommentModel::class.java)
+                    Log.d("왜 내용이 안나옴?",item?.comment.toString())
                     commentList.add(item!!)
                 }
                 clvAdapter.notifyDataSetChanged()
@@ -189,7 +190,7 @@ class BoardActivity : AppCompatActivity() {
                 Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
             }
         }
-        FBRef.boardRef.addValueEventListener(postListener)
+        FBRef.commentRef.child(key).addValueEventListener(postListener)
     }
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {

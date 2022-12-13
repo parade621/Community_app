@@ -38,10 +38,10 @@ class CommentLVAdapter(val commentList : MutableList<CommentModel>): BaseAdapter
             commentItemView.setBackgroundColor(Color.parseColor("#fff0f5"))
         }
         convertView!!.findViewById<TextView>(R.id.LVTitle).text = commentList[position].uid
-        convertView!!.findViewById<TextView>(R.id.LVContent).text = commentList[position].Comment
+        convertView!!.findViewById<TextView>(R.id.LVContent).text = commentList[position].comment
         convertView!!.findViewById<TextView>(R.id.LVTime).text = commentList[position].time
 
-        Log.d("이거 시발 왜 안나와",commentList[position].Comment)
+        Log.d("이거 시발 왜 안나와",commentList[position].comment)
 
 
         return convertView!!
