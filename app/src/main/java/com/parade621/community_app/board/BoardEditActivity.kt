@@ -31,7 +31,6 @@ class BoardEditActivity : AppCompatActivity() {
     private lateinit var key:String
     private lateinit var storage:FirebaseStorage
     private lateinit var originalTime:String
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)

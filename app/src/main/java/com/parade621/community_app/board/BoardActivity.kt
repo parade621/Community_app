@@ -1,10 +1,15 @@
 package com.parade621.community_app.board
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +28,7 @@ import com.parade621.community_app.R
 import com.parade621.community_app.databinding.ActivityBoardBinding
 import com.parade621.community_app.utils.FBAuth
 import com.parade621.community_app.utils.FBRef
+import com.parade621.community_app.utils.Time
 
 class BoardActivity : AppCompatActivity() {
 
@@ -31,7 +37,8 @@ class BoardActivity : AppCompatActivity() {
     private lateinit var binding:ActivityBoardBinding
     private lateinit var storage:FirebaseStorage
     private lateinit var key:String
-    //private lateinit var writeUser:String
+    lateinit var clvAdapter:CommentLVAdapter
+    val commentList = mutableListOf<CommentModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -49,6 +56,10 @@ class BoardActivity : AppCompatActivity() {
         // 액티비티 실행시 설정사항
         key= intent.getStringExtra("key").toString()
 
+        // 댓글 어뎁터 설정
+        clvAdapter = CommentLVAdapter(commentList)
+        binding.commentListView.adapter = clvAdapter
+
 
     }
 
@@ -57,12 +68,17 @@ class BoardActivity : AppCompatActivity() {
         // 주요 기능
         setBoard() // FB RB에서 게시글 받아오기
         setImage() // FB Storage에서 사진 받아오기
+        //setComment() // FB RB에서 게시글의 댓글 받아오기
+        getComment()
     }
 
     override fun onResume() {
         super.onResume()
         binding.boardSettingIcon.setOnClickListener {
             showDialog()
+        }
+        binding.commentBtn.setOnClickListener {
+            insertComment()
         }
     }
 
@@ -83,7 +99,7 @@ class BoardActivity : AppCompatActivity() {
                     // 밑에 이걸 여기서 안해주면 계속 uid관련 오류가 남ㅠㅠ
                     if (FBAuth.getUid().equals(boardData.uid)){
                         // 글쓴이만 수정/삭제 가능.
-                        binding.boardSettingIcon.visibility = View.VISIBLE
+                        binding.boardSettingIcon.isVisible = true
                     }
 
 
@@ -141,6 +157,57 @@ class BoardActivity : AppCompatActivity() {
             finish()
 
         }
+    }
+
+    fun insertComment(){
+        val comment = binding.commentTextArea.text.toString()
+        var items=CommentModel(comment,FBAuth.getUid(),Time.getTime())
+        val commentKey = FBRef.addComment(key, items)
+        /*boardData.commentList?.add(commentKey.toString())
+        FBRef.editBoard(key,boardData)*/
+        Toast.makeText(this,"댓글 등록 완료",Toast.LENGTH_SHORT).show()
+        binding.commentTextArea.text.clear()
+        binding.commentTextArea.clearFocus()
+        onRestart()
+    }
+
+    fun getComment(){
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                commentList.clear()
+
+                for (dataModel in dataSnapshot.children){
+                    val item = dataModel.getValue(CommentModel::class.java)
+                    Log.d("왜 내용이 안나옴?",item?.comment.toString())
+                    commentList.add(item!!)
+                }
+                clvAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+
+                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        FBRef.commentRef.child(key).addValueEventListener(postListener)
+    }
+
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        if(event?.action == MotionEvent.ACTION_DOWN){
+            val v = currentFocus
+            if(v is EditText){
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if(!outRect.contains(event.rawX.toInt(),event.rawY.toInt())){
+                    v.clearFocus()
+                    val imm: InputMethodManager =
+                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(v.windowToken,0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
     }
 
 }
