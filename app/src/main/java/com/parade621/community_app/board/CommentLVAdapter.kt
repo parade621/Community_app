@@ -35,7 +35,8 @@ class CommentLVAdapter(val commentList : MutableList<CommentModel>): BaseAdapter
         // 작성자 본인이면, item의 색이 좀 다르게 표시되도록 할 것임.
         val commentItemView = convertView!!.findViewById<LinearLayout>(R.id.boardCommentItemView)
         if(commentList[position].uid.equals(FBAuth.getUid())) {
-            commentItemView.setBackgroundColor(Color.parseColor("#fff0f5"))
+            //commentItemView.setBackgroundColor(Color.parseColor("#fff0f5"))
+            commentItemView.setBackgroundResource(R.drawable.comment_uid_shape)
         }
         convertView!!.findViewById<TextView>(R.id.LVTitle).text = commentList[position].uid
         convertView!!.findViewById<TextView>(R.id.LVContent).text = commentList[position].comment
