@@ -2,7 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/boardCommentItemView"
-    android:background="@drawable/comment_border"
+    android:background="@drawable/comment_shape"
+    android:layout_margin="3dp"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:orientation="vertical">

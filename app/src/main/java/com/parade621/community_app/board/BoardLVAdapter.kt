@@ -29,13 +29,14 @@ class BoardLVAdapter(val boardList : MutableList<BoardModel>):BaseAdapter() {
 
         var convertView = convertView
         //if(convertView == null){
-        convertView = LayoutInflater.from(parent?.context).inflate(R.layout.board_lv_items,parent,false)
+        convertView = LayoutInflater.from(parent?.context).inflate(R.layout.board_list_lv_items,parent,false)
         //}
 
         // 작성자 본인이면, item의 색이 좀 다르게 표시되도록 할 것임.
         val boardItemView = convertView!!.findViewById<LinearLayout>(R.id.BoarditemView)
         if(boardList[position].uid.equals(FBAuth.getUid())) {
-            boardItemView.setBackgroundColor(Color.parseColor("#fff0f5"))
+            //boardItemView.setBackgroundColor(Color.parseColor("#fff0f5"))
+            boardItemView.setBackgroundResource(R.drawable.board_list_item_uid_shape)
         }
 
         convertView!!.findViewById<TextView>(R.id.LVTitle).text = boardList[position].title
@@ -45,4 +46,10 @@ class BoardLVAdapter(val boardList : MutableList<BoardModel>):BaseAdapter() {
 
         return convertView!!
     }
+/*    fun setLayoutDynamicly(view:View){
+//        val targetView:ViewGroup.LayoutParams = view.findViewById<LinearLayout>(R.id.BoarditemView).layoutParams
+//        targetView.setBackgroundResource()
+        val root = view.findViewById<LinearLayout>(R.id.BoarditemView)
+        root.setBackgroundResource(R.drawable.board_list_item_uid_shape)
+    }*/
 }
