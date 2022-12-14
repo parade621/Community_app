@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -23,6 +24,13 @@ class StoreFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val view = inflater.inflate(R.layout.fragment_store, container, false)
+
+        val webView : WebView = view.findViewById(R.id.storeWebView)
+        webView.settings.javaScriptEnabled=true
+        webView.loadUrl("https://www.inflearn.com/")
+
 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_store,container,false)
 
@@ -52,7 +60,7 @@ class StoreFragment : Fragment() {
 
         }
 
-        return binding.root
+        return view
     }
 
 
