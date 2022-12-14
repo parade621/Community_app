@@ -16,7 +16,6 @@ class ContentShowActivity : AppCompatActivity() {
         val getUrl = intent.getStringExtra("url")
 
         val webView :WebView = findViewById(R.id.webView)
-        webView.loadUrl(getUrl.toString())
-        finish()
+        webView.loadUrl(intent.getStringExtra("url").toString())
     }
 }
