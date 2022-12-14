@@ -199,7 +199,7 @@ class BoardActivity : AppCompatActivity() {
     fun setHeight(size:Int){
         val commentParam:ViewGroup.LayoutParams = binding.commentListView.layoutParams
         val displayMetrics = resources.displayMetrics
-        val dp = Math.round((100*size+20) * displayMetrics.density) // 너무 딱 맞게 높이를 설정하면, ListView의 Scroll 기능이 나타나서 +20 해줌.
+        val dp = Math.round((102*size+20) * displayMetrics.density) // 너무 딱 맞게 높이를 설정하면, ListView의 Scroll 기능이 나타나서 +20 해줌.
         commentParam.height = dp
         binding.commentListView.layoutParams=commentParam
     }
