@@ -28,40 +28,39 @@ class StoreFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_store, container, false)
 
         val webView : WebView = view.findViewById(R.id.storeWebView)
+        webView.settings.javaScriptEnabled=true
         webView.loadUrl("https://www.inflearn.com/")
 
+
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_store,container,false)
+
+        binding.homeTab.setOnClickListener {
+
+            it.findNavController().navigate(R.id.action_storeFragment_to_homeFragment)
+
+        }
+        binding.goodtipTab.setOnClickListener {
+
+            it.findNavController().navigate(R.id.action_storeFragment_to_tipFragment)
+
+        }
+        binding.talkTab.setOnClickListener {
+
+            it.findNavController().navigate(R.id.action_storeFragment_to_talkFragment)
+
+        }
+        binding.bookmarkTab.setOnClickListener {
+
+            it.findNavController().navigate(R.id.action_storeFragment_to_bookmarkFragment)
+
+        }
+        binding.storeTab.setOnClickListener {
+
+            Toast.makeText(context, "현재 탭입니다!", Toast.LENGTH_SHORT).show()
+
+        }
+
         return view
-
-
-//        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_store,container,false)
-//
-//        binding.homeTab.setOnClickListener {
-//
-//            it.findNavController().navigate(R.id.action_storeFragment_to_homeFragment)
-//
-//        }
-//        binding.goodtipTab.setOnClickListener {
-//
-//            it.findNavController().navigate(R.id.action_storeFragment_to_tipFragment)
-//
-//        }
-//        binding.talkTab.setOnClickListener {
-//
-//            it.findNavController().navigate(R.id.action_storeFragment_to_talkFragment)
-//
-//        }
-//        binding.bookmarkTab.setOnClickListener {
-//
-//            it.findNavController().navigate(R.id.action_storeFragment_to_bookmarkFragment)
-//
-//        }
-//        binding.storeTab.setOnClickListener {
-//
-//            Toast.makeText(context, "현재 탭입니다!", Toast.LENGTH_SHORT).show()
-//
-//        }
-//
-//        return binding.root
     }
 
 
