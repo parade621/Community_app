@@ -7,12 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
-import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -141,7 +138,7 @@ class BoardActivity : AppCompatActivity() {
 
     private fun showDialog() {
 
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.board_edit_custom_dialog, null)
         val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
             .setTitle("게시글 수정/삭제")
