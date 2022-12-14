@@ -26,6 +26,8 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
 
+
+
         binding.homeTab.setOnClickListener {
             Toast.makeText(context, "현재 탭입니다!",Toast.LENGTH_SHORT).show()
         }
