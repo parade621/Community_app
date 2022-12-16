@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -59,21 +60,17 @@ class BoardActivity : AppCompatActivity() {
         // 댓글 어뎁터 설정
         clvAdapter = CommentLVAdapter(commentList)
         binding.commentListView.adapter = clvAdapter
-
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-        // 주요 기능
         setBoard() // FB RB에서 게시글 받아오기
         setImage() // FB Storage에서 사진 받아오기
         //setComment() // FB RB에서 게시글의 댓글 받아오기
         getComment()
+
+
     }
 
     override fun onResume() {
         super.onResume()
+        //Log.d("3초뒤 onResume에서 어떻게 나옴?", testHeight.itemHeight.toString())
         binding.boardSettingIcon.setOnClickListener {
             showDialog()
         }
@@ -180,12 +177,13 @@ class BoardActivity : AppCompatActivity() {
 
                 for (dataModel in dataSnapshot.children){
                     val item = dataModel.getValue(CommentModel::class.java)
-                    Log.d("왜 내용이 안나옴?",item?.comment.toString())
                     commentList.add(item!!)
                     commentSize++
                 }
+                // 차후에 코루틴과 kotlin Flow를 공부한 후, 댓글 창의 높이를 동적으로 받는 코드를 반드시 만들겠다.
                 setHeight(commentSize)
                 clvAdapter.notifyDataSetChanged()
+
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -199,7 +197,7 @@ class BoardActivity : AppCompatActivity() {
     fun setHeight(size:Int){
         val commentParam:ViewGroup.LayoutParams = binding.commentListView.layoutParams
         val displayMetrics = resources.displayMetrics
-        val dp = Math.round((102*size+20) * displayMetrics.density) // 너무 딱 맞게 높이를 설정하면, ListView의 Scroll 기능이 나타나서 +20 해줌.
+        val dp = Math.round((200*size+20) * displayMetrics.density) // 너무 딱 맞게 높이를 설정하면, ListView의 Scroll 기능이 나타나서 +20 해줌.
         commentParam.height = dp
         binding.commentListView.layoutParams=commentParam
     }
