@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isVisible
 import com.parade621.community_app.R
 import com.parade621.community_app.utils.FBAuth
+import java.util.logging.Handler
 
 class CommentLVAdapter(val commentList : MutableList<CommentModel>): BaseAdapter() {
     override fun getCount(): Int {
@@ -37,13 +39,12 @@ class CommentLVAdapter(val commentList : MutableList<CommentModel>): BaseAdapter
         if(commentList[position].uid.equals(FBAuth.getUid())) {
             //commentItemView.setBackgroundColor(Color.parseColor("#fff0f5"))
             commentItemView.setBackgroundResource(R.drawable.comment_uid_shape)
+            commentItemView.findViewById<TextView>(R.id.editBtn).isVisible=true
+            commentItemView.findViewById<TextView>(R.id.deleteBtn).isVisible=true
         }
         convertView!!.findViewById<TextView>(R.id.LVTitle).text = commentList[position].uid
         convertView!!.findViewById<TextView>(R.id.LVContent).text = commentList[position].comment
         convertView!!.findViewById<TextView>(R.id.LVTime).text = commentList[position].time
-
-        Log.d("이거 시발 왜 안나와",commentList[position].comment)
-
 
         return convertView!!
     }

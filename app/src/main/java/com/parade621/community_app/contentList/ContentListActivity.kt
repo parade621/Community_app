@@ -56,8 +56,6 @@ class ContentListActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 for (dataModel in dataSnapshot.children){
-                    //Log.d("ContentListActivity", dataModel.toString())
-                    //Log.d("ContentListActivity", dataModel.key.toString())
                     val item = dataModel.getValue(ContentModel::class.java)
                     items.add(item!!)
                     itemKeyList.add(dataModel.key.toString()) // 이 key값을 Adapter로 넘겨서 bookmark 저장을 하도록 할 것.

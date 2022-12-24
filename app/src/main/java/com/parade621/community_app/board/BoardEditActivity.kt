@@ -43,7 +43,7 @@ class BoardEditActivity : AppCompatActivity() {
         getBoardData()
         getImageData()
 
-        // 이미지를 내부 저장소(엘범)에서 불러오는 코드
+        // 이미지를 내부 저장소(엘범)에서 불러온다.
         binding.imageUploadBtn.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery,100)
@@ -58,8 +58,7 @@ class BoardEditActivity : AppCompatActivity() {
             var items:BoardModel?
             items= BoardModel(title,content, FBAuth.getUid(), originalTime)
 
-            FBRef.editBoard(key, items) // 게시글의 key값을 받아온다.
-            // 이미지 이름을 아무렇게나 넣으면, 이미지 이름에 대한 정보를 모르기 때문에, key값으로 줘서 찾기 쉽게 하는 거임.
+            FBRef.editBoard(key, items)
             // 다수 이미지를 추가하는 기능도 추가 예정.
 
             // 이미지가 변경되었을 때만 업로드

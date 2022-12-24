@@ -33,14 +33,11 @@ class BoardWriteActivity : AppCompatActivity() {
 
         storage = Firebase.storage
 
-
         // 이미지를 내부 저장소(엘범)에서 불러오는 코드1
         binding.imageUploadBtn.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery,100)
-
         }
-
 
         binding.uploadBtn.setOnClickListener{
 
@@ -54,13 +51,9 @@ class BoardWriteActivity : AppCompatActivity() {
             // 이미지 이름을 아무렇게나 넣으면, 이미지 이름에 대한 정보를 모르기 때문에, key값으로 줘서 찾기 쉽게 하는 거임.
             // 다수 이미지를 추가하는 기능도 추가 예정.
 
-
-
             //if(binding.imageUploadBtn.resources.to == "plusbtn" )
             // 이미지가 변경되었을 때만 업로드
             if(binding.imageUploadBtn.tag != "Initialized_image") imageUploadToFB(key)
-
-
 
             Toast.makeText(this, "게시글 입력 완료!", Toast.LENGTH_SHORT).show()
             finish()
@@ -79,11 +72,9 @@ class BoardWriteActivity : AppCompatActivity() {
     private fun imageUploadToFB(key:String){
 
         // 게시글의 key값을 받아와서, 업로드된 이미지 이름으로 저장할거임.
-
         val storageRef = storage.reference
         val mountainsRef = storageRef.child("${key}.png")
         val imageView = binding.imageUploadBtn
-
 
         imageView.isDrawingCacheEnabled = true
         imageView.buildDrawingCache()
