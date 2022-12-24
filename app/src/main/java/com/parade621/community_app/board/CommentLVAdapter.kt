@@ -46,15 +46,6 @@ class CommentLVAdapter(val commentList : MutableList<CommentModel>): BaseAdapter
         convertView!!.findViewById<TextView>(R.id.LVContent).text = commentList[position].comment
         convertView!!.findViewById<TextView>(R.id.LVTime).text = commentList[position].time
 
-        testHeight.itemHeight+=convertView!!.findViewById<LinearLayout>(R.id.boardCommentItemView).height
-        Log.d("어뎁터에서도 0임?",convertView!!.findViewById<LinearLayout>(R.id.boardCommentItemView).measuredHeight.toString())
-
-        android.os.Handler().postDelayed({
-            Log.d("0.3초뒤 어뎁터에서도 0임?",convertView!!.findViewById<LinearLayout>(R.id.boardCommentItemView).measuredHeight.toString())
-            testHeight.itemHeight=convertView!!.findViewById<LinearLayout>(R.id.boardCommentItemView).height
-        },300)
-
-
         return convertView!!
     }
 }
