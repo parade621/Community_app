@@ -17,12 +17,13 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.parade621.community_app.MainActivity
 import com.parade621.community_app.R
+import com.parade621.community_app.databinding.ActivityAuthLoginBinding
 import com.parade621.community_app.databinding.ActivityLoginBinding
 
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: ActivityAuthLoginBinding
     private lateinit var imm : InputMethodManager
     private lateinit var auth: FirebaseAuth
     private lateinit var ani : Animation
@@ -30,8 +31,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_login)
+        setContentView(R.layout.activity_auth_login)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_auth_login)
         imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         auth = Firebase.auth
 

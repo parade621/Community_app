@@ -10,19 +10,20 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.parade621.community_app.MainActivity
 import com.parade621.community_app.R
+import com.parade621.community_app.databinding.ActivityAuthIntroBinding
 import com.parade621.community_app.databinding.ActivityIntroBinding
 
 
 class IntroActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityIntroBinding
+    private lateinit var binding : ActivityAuthIntroBinding
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intro)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_intro)
+        setContentView(R.layout.activity_auth_intro)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_auth_intro)
         auth = Firebase.auth
 
         binding.loginBtn.setOnClickListener {
