@@ -18,22 +18,22 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.parade621.community_app.MainActivity
 import com.parade621.community_app.R
-import com.parade621.community_app.databinding.ActivityJoinBinding
+import com.parade621.community_app.databinding.ActivityAuthJoinBinding
 
 
 class JoinActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var binding: ActivityJoinBinding
+    private lateinit var binding: ActivityAuthJoinBinding
     private lateinit var inputMethodManager : InputMethodManager
     private lateinit var animation:Animation
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_join)
+        setContentView(R.layout.activity_auth_join)
         auth = Firebase.auth
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_join)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_auth_join)
         animation = AnimationUtils.loadAnimation(this, R.anim.shake)
 
         binding.joinBtn.setOnClickListener {
@@ -48,6 +48,7 @@ class JoinActivity : AppCompatActivity() {
 
             val email = binding.emailTextArea.text.toString()
             val password = binding.pwTextArea.text.toString()
+
             // 값이 비어있는지 확인
             if(email.isEmpty()){
                 joinAccept = false
