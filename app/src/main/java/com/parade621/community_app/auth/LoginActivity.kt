@@ -18,7 +18,6 @@ import com.google.firebase.ktx.Firebase
 import com.parade621.community_app.MainActivity
 import com.parade621.community_app.R
 import com.parade621.community_app.databinding.ActivityAuthLoginBinding
-import com.parade621.community_app.databinding.ActivityLoginBinding
 
 
 class LoginActivity : AppCompatActivity() {

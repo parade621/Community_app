@@ -19,7 +19,5 @@ z
 Japp/src/main/java/com/parade621/community_app/contentList/BookmarkModel.kt,2\c\2c295ce1eb98d4764b5bbaa2a010f14a3831afb0
 €
 Papp/src/main/java/com/parade621/community_app/contentList/ContentListActivity.kt,2\5\25b0bac5cc781f9a0c2dc876b6230daf44d8ad26
-s
-Capp/src/main/java/com/parade621/community_app/auth/IntroActivity.kt,e\f\ef20bd4604b5bf3721da7a9ed6c49f809ac297d1
 m
 =app/src/main/java/com/parade621/community_app/MainActivity.kt,4\a\4a28ca7a815507d2965de7b15e32677e02e61859
